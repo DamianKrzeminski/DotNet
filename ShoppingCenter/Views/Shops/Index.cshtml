@@ -1,0 +1,79 @@
+@model ShoppingCenter.Models.ShopGenreViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Shops" asp-action="Index">
+    <p>
+        ShopFloor: <select asp-for="ShopFloor" asp-items="Model.Floors">
+            <option value="">All</option>
+        </select>
+
+        ShopCategory: <select asp-for="ShopGenre" asp-items="Model.Categories">
+            <option value="">All</option>
+        </select>
+
+        ShopName: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Shops[0].ShopName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shops[0].ShopCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shops[0].Floor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shops[0].OpenHour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shops[0].CloseHour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shops[0].OpenInSunday)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Shops) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenHour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CloseHour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenInSunday)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
